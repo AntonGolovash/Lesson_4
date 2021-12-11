@@ -89,7 +89,7 @@ template<typename T>
 {
 	 if (_data != nullptr && _size > 0)
 	 {
-		 T* temp = new T[--_size]{ nullptr };
+		 T* temp = new T[--_size];
 
 		 for (size_t i = 0; i < _size; i++)
 		 {
@@ -98,7 +98,7 @@ template<typename T>
 
 		 delete[] _data;
 
-		 _data = new T[_size]{ nullptr };
+		 _data = new T[_size];
 
 		 for (size_t i = 0; i < _size; i++)
 		 {

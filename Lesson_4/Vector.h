@@ -18,7 +18,7 @@ public:
 	Vector<T>& operator= (Vector&& other);
 	void pop_back();
 	void push_back(T item);
-	friend ostream& operator<< (ostream& out, const Vector<T>& vector);
+	friend ostream& operator<< <T>(ostream& out, const Vector& vector);
 	int size();
 private:
 	T* _data;
