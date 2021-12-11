@@ -1,4 +1,9 @@
 #include "Vector.h"
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <ostream>
+using namespace std;
 
 template<typename T>
 Vector<T>::Vector() : _data(nullptr), _size(0)
@@ -82,22 +87,71 @@ template<typename T>
 template<typename T>
  void Vector<T>::pop_back()
 {
+	 if (_data != nullptr && _size > 0)
+	 {
+		 T* temp = new T[--_size]{ nullptr };
 
+		 for (size_t i = 0; i < _size; i++)
+		 {
+			 temp[i] = _data[i];
+		 }
+
+		 delete[] _data;
+
+		 _data = new T[_size]{ nullptr };
+
+		 for (size_t i = 0; i < _size; i++)
+		 {
+			 _data[i] = temp[i];
+		 }
+
+		 delete[] temp;
+	 }
 }
 
 template<typename T>
  void Vector<T>::push_back(T item)
 {
+	 if (_data != nullptr && _size > 0)
+	 {
+		 T* temp = new T[++_size];
+
+		 for (size_t i = 0; i < _size - 1; i++)
+		 {
+			 temp[i] = _data[i];
+		 }
+
+		 delete[] _data;
+		 _data = new T[_size];
+
+		 for (size_t i = 0; i < _size; i++)
+		 {
+			 _data[i] = temp[i];
+		 }
+
+		 delete[] temp;
+		 _data[_size - 1] = item;
+	 }
+	 else
+	 {
+		 _size = 1;
+		 _data = new T[_size];
+		 _data[0] = item;
+	 }
 }
 
 template<typename T>
  int Vector<T>::size()
 {
-	return 0;
+	return _size;
 }
 
  template<typename T>
-ostream& operator<< (ostream& out, const Vector<T>& data)
+ostream& operator<< (ostream& out, const Vector<T>& vector)
 {
-	// TODO: вставьте здесь оператор return
+	for (size_t i = 0; i < vector._size; i++)
+	{
+		out << to_string(vector._data[i]) << "\t";
+	}
+	return out;
 }
